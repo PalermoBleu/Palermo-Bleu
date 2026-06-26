@@ -21,6 +21,53 @@
 html { scroll-behavior: smooth; }
 body { background: var(--white); color: var(--ink); font-family: 'DM Sans', sans-serif; font-weight: 300; overflow-x: hidden; }
 
+/* ── INTRO SCREEN ── */
+.intro {
+  position: fixed; inset: 0; z-index: 9999;
+  background: var(--white);
+  display: flex; align-items: center; justify-content: center;
+  pointer-events: none;
+}
+.intro-logo {
+  width: 120px; height: auto;
+  opacity: 0;
+  animation: introFadeIn 0.6s 0.2s ease forwards, introFadeOut 0.5s 1.6s ease forwards;
+}
+.intro.done { display: none; }
+@keyframes introFadeIn { from { opacity: 0; transform: scale(0.92); } to { opacity: 1; transform: scale(1); } }
+@keyframes introFadeOut { from { opacity: 1; } to { opacity: 0; } }
+.intro-screen-fade {
+  animation: screenFadeOut 0.5s 1.6s ease forwards;
+}
+@keyframes screenFadeOut { from { opacity: 1; } to { opacity: 0; } }
+
+/* ── PARALLAX ── */
+.parallax-wrap { overflow: hidden; position: relative; }
+.parallax-img {
+  width: 100%; height: 115%;
+  object-fit: cover;
+  transform: translateY(0);
+  will-change: transform;
+}
+.hero-inner {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+.hero-inner .hero-placeholder,
+.hero-inner video,
+.hero-inner img {
+  position: absolute; inset: 0; width: 100%; height: 115%;
+  object-fit: cover; will-change: transform;
+}
+
+/* ── FADE IN ON SCROLL ── */
+.fade-up {
+  opacity: 0; transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+
 /* ── NAV ── */
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 200;
@@ -289,6 +336,11 @@ footer {
 </head>
 <body>
 
+<!-- INTRO SCREEN -->
+<div class="intro" id="intro">
+  <img class="intro-logo" src="logo.png" alt="Palermo Bleu">
+</div>
+
 <!-- SIDEBAR OVERLAY -->
 <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
 
@@ -343,23 +395,25 @@ footer {
 </nav>
 
 <!-- HERO — reemplaza con <video autoplay muted loop playsinline src="tu-video.mp4"> o <img src="tu-imagen.jpg"> -->
-<section class="hero">
-  <div class="hero-placeholder">
-    <span class="hero-placeholder-text">Palermo Bleu</span>
+<section class="hero parallax-wrap">
+  <div class="hero-inner">
+    <div class="hero-placeholder" id="heroParallax">
+      <span class="hero-placeholder-text">Palermo Bleu</span>
+    </div>
   </div>
   <span class="hero-caption">New Collection — 2026</span>
 </section>
 
 <!-- DUAL IMAGE BAND -->
 <div class="dual-band">
-  <div class="dual-band-item">
-    <!-- <img src="editorial-1.jpg" alt=""> -->
+  <div class="dual-band-item parallax-wrap">
+    <!-- <img class="parallax-img" src="editorial-1.jpg" alt=""> -->
     <div class="dual-placeholder dual-placeholder-1">
       <span class="dual-label">Image 01</span>
     </div>
   </div>
-  <div class="dual-band-item">
-    <!-- <img src="editorial-2.jpg" alt=""> -->
+  <div class="dual-band-item parallax-wrap">
+    <!-- <img class="parallax-img" src="editorial-2.jpg" alt=""> -->
     <div class="dual-placeholder dual-placeholder-2">
       <span class="dual-label">Image 02</span>
     </div>
@@ -367,7 +421,7 @@ footer {
 </div>
 
 <!-- PRODUCT SECTION -->
-<div class="section-header">
+<div class="section-header fade-up">
   <h2 class="section-title">T-Shirts <em>&</em> Tops</h2>
   <span class="section-count">— Coming soon</span>
 </div>
@@ -433,7 +487,7 @@ footer {
 </div>
 
 <!-- BRAND STRIP -->
-<div class="brand-strip">
+<div class="brand-strip fade-up">
   <h2>Made for those who wear <em>colour</em> the way others wear silence.</h2>
   <p>Palermo Bleu draws from European expressionist painting — raw pigment, lived-in texture, the warmth of things that carry history. Each piece is built to be worn, not preserved.</p>
 </div>
@@ -457,6 +511,17 @@ footer {
 </footer>
 
 <script>
+// ── INTRO ──
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    const intro = document.getElementById('intro');
+    intro.style.transition = 'opacity 0.5s ease';
+    intro.style.opacity = '0';
+    setTimeout(() => { intro.classList.add('done'); }, 500);
+  }, 1800);
+});
+
+// ── SIDEBAR ──
 function openSidebar() {
   document.getElementById('sidebar').classList.add('open');
   document.getElementById('sidebarOverlay').classList.add('visible');
@@ -474,6 +539,46 @@ function toggleCategory(id) {
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') closeSidebar();
 });
+
+// ── PARALLAX ──
+function handleParallax() {
+  const scrollY = window.scrollY;
+  // Hero parallax
+  const heroEl = document.getElementById('heroParallax');
+  if (heroEl) {
+    heroEl.style.transform = `translateY(${scrollY * 0.3}px)`;
+  }
+  // Parallax imgs
+  document.querySelectorAll('.parallax-img').forEach(img => {
+    const rect = img.closest('.parallax-wrap').getBoundingClientRect();
+    const offset = (rect.top / window.innerHeight) * 30;
+    img.style.transform = `translateY(${offset}px)`;
+  });
+}
+
+// ── FADE UP ON SCROLL ──
+const fadeEls = document.querySelectorAll('.fade-up');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+fadeEls.forEach(el => observer.observe(el));
+
+// ── PRODUCT CARDS FADE ──
+document.querySelectorAll('.product-card').forEach((card, i) => {
+  card.style.opacity = '0';
+  card.style.transform = 'translateY(20px)';
+  card.style.transition = `opacity 0.5s ease ${i * 0.08}s, transform 0.5s ease ${i * 0.08}s`;
+  observer.observe(card);
+  card.classList.add('fade-up');
+});
+
+window.addEventListener('scroll', handleParallax, { passive: true });
+handleParallax();
 </script>
 
 </body>
