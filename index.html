@@ -36,6 +36,10 @@ body { background: var(--white); color: var(--ink); font-family: 'DM Sans', sans
 .intro.done { display: none; }
 @keyframes introFadeIn { from { opacity: 0; transform: scale(0.92); } to { opacity: 1; transform: scale(1); } }
 @keyframes introFadeOut { from { opacity: 1; } to { opacity: 0; } }
+.intro-screen-fade {
+  animation: screenFadeOut 0.5s 1.6s ease forwards;
+}
+@keyframes screenFadeOut { from { opacity: 1; } to { opacity: 0; } }
 
 /* ── PARALLAX ── */
 .parallax-wrap { overflow: hidden; position: relative; }
@@ -64,31 +68,49 @@ body { background: var(--white); color: var(--ink); font-family: 'DM Sans', sans
 }
 .fade-up.visible { opacity: 1; transform: translateY(0); }
 
-/* ── NAV ── */
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-  display: flex; align-items: center; justify-content: space-between;
+  display: grid; grid-template-columns: 1fr auto 1fr;
+  align-items: center;
   padding: 0 2rem; height: 56px;
-  background: rgba(255,255,255,0.92); backdrop-filter: blur(10px);
+  background: transparent;
+  border-bottom: none;
+  transition: background 0.5s ease, border-color 0.5s ease, opacity 0.3s ease, visibility 0.3s ease;
+}
+nav.scrolled {
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--border);
-  transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 nav.hidden { opacity: 0; visibility: hidden; }
+.nav-left { display: flex; align-items: center; }
+.nav-center { display: flex; justify-content: center; }
 .nav-logo {
   font-family: 'Cormorant Garamond', serif;
   font-size: 1.15rem; font-weight: 400; letter-spacing: 0.18em;
-  text-transform: uppercase; color: var(--ink); text-decoration: none;
+  text-transform: uppercase; color: white; text-decoration: none;
+  transition: color 0.5s ease;
 }
-.nav-right { display: flex; align-items: center; gap: 2rem; }
-.nav-right a { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
-.nav-right a:hover { color: var(--ink); }
+nav.scrolled .nav-logo { color: var(--ink); }
+.nav-right { display: flex; align-items: center; gap: 2rem; justify-content: flex-end; }
+.nav-right a {
+  font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+  color: white; text-decoration: none;
+  transition: color 0.5s ease, opacity 0.2s;
+}
+nav.scrolled .nav-right a { color: var(--muted); }
+.nav-right a:hover { opacity: 0.7; }
 .nav-menu-btn {
   background: none; border: none; cursor: pointer;
-  font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
-  color: var(--ink); display: flex; align-items: center; gap: 0.5rem;
+  display: flex; align-items: center;
 }
 .hamburger { display: flex; flex-direction: column; gap: 4px; }
-.hamburger span { display: block; width: 18px; height: 1px; background: var(--ink); transition: all 0.3s; }
+.hamburger span {
+  display: block; width: 18px; height: 1px;
+  background: white;
+  transition: background 0.5s ease;
+}
+nav.scrolled .hamburger span { background: var(--ink); }
 
 /* ── SIDEBAR ── */
 .sidebar {
@@ -188,31 +210,81 @@ nav.hidden { opacity: 0; visibility: hidden; }
 
 /* ── HERO ── */
 .hero {
-  margin-top: 56px;
-  position: relative; width: 100%; aspect-ratio: 16/9;
-  max-height: 92vh; overflow: hidden;
-  background: var(--off);
+  position: relative; width: 100%; height: 100vh;
+  overflow: hidden; background: #111;
   display: flex; align-items: center; justify-content: center;
 }
-.hero video, .hero img {
+.hero video {
   position: absolute; inset: 0; width: 100%; height: 100%;
-  object-fit: cover;
+  object-fit: cover; opacity: 0.85;
 }
-.hero-placeholder {
+.hero-overlay {
   position: absolute; inset: 0;
-  background: linear-gradient(135deg, #e8e0d4 0%, #d4c9b8 50%, #c9bfad 100%);
-  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.3) 100%);
 }
-.hero-placeholder-text {
+.hero-fade-bottom {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 65vh; z-index: 2;
+  background: linear-gradient(to top,
+    rgba(255,255,255,1) 0%,
+    rgba(255,255,255,0.95) 8%,
+    rgba(255,255,255,0.8) 20%,
+    rgba(255,255,255,0.55) 38%,
+    rgba(255,255,255,0.28) 55%,
+    rgba(255,255,255,0.08) 72%,
+    rgba(255,255,255,0) 100%);
+  pointer-events: none;
+}
+.hero-fade-blur {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 50vh; z-index: 1;
+  backdrop-filter: blur(3px) saturate(1.1);
+  -webkit-backdrop-filter: blur(3px) saturate(1.1);
+  mask-image: linear-gradient(to top, black 0%, black 15%, rgba(0,0,0,0.5) 40%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to top, black 0%, black 15%, rgba(0,0,0,0.5) 40%, transparent 100%);
+  pointer-events: none;
+}
+.hero-logo-corner {
+  position: absolute; bottom: 2.2rem; right: 2rem; z-index: 3;
+  width: 52px; height: auto; opacity: 0.35;
+  filter: brightness(0) invert(1);
+  pointer-events: none;
+}
+.hero-content {
+  position: relative; z-index: 2;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; gap: 2rem;
+}
+.hero-title {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(2.5rem, 6vw, 5rem);
-  font-weight: 300; font-style: italic;
-  letter-spacing: 0.06em; color: rgba(26,26,24,0.25);
+  font-size: clamp(2.8rem, 7vw, 6rem);
+  font-weight: 300; letter-spacing: 0.22em;
+  text-transform: uppercase; color: white;
+  line-height: 1; opacity: 0;
+  animation: heroFadeUp 1s 2.1s ease forwards;
 }
-.hero-caption {
-  position: absolute; bottom: 2rem; left: 2rem;
-  font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase;
-  color: rgba(255,255,255,0.7);
+.hero-btn {
+  display: inline-block; padding: 0.75rem 2.2rem;
+  border: 1px solid rgba(255,255,255,0.7);
+  font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase;
+  color: white; text-decoration: none;
+  font-family: 'DM Sans', sans-serif;
+  position: relative; overflow: hidden;
+  transition: color 0.4s ease;
+  opacity: 0; animation: heroFadeUp 1s 2.4s ease forwards;
+}
+.hero-btn::before {
+  content: ''; position: absolute; inset: 0;
+  background: white;
+  transform: translateX(-101%);
+  transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+.hero-btn:hover { color: var(--ink); }
+.hero-btn:hover::before { transform: translateX(0); }
+.hero-btn span { position: relative; z-index: 1; }
+@keyframes heroFadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 /* ── DUAL IMAGE BAND ── */
@@ -268,9 +340,6 @@ nav.hidden { opacity: 0; visibility: hidden; }
   background: var(--white); cursor: pointer;
   display: flex; flex-direction: column;
   text-decoration: none; color: inherit;
-  /* FIX: no fade-up on cards — always visible */
-  opacity: 1 !important;
-  transform: none !important;
 }
 .product-thumb {
   aspect-ratio: 3/4; overflow: hidden;
@@ -447,12 +516,16 @@ footer {
 
 <!-- NAV -->
 <nav>
-  <button class="nav-menu-btn" onclick="openSidebar()">
-    <div class="hamburger">
-      <span></span><span></span><span></span>
-    </div>
-  </button>
-  <a href="#" class="nav-logo">Palermo Bleu</a>
+  <div class="nav-left">
+    <button class="nav-menu-btn" onclick="openSidebar()">
+      <div class="hamburger">
+        <span></span><span></span><span></span>
+      </div>
+    </button>
+  </div>
+  <div class="nav-center">
+    <a href="#" class="nav-logo">Palermo Bleu</a>
+  </div>
   <div class="nav-right">
     <a href="#">About</a>
     <a href="#">Contact</a>
@@ -460,25 +533,20 @@ footer {
 </nav>
 
 <!-- HERO -->
-<section class="hero parallax-wrap">
-  <div class="hero-inner">
-    <img id="heroParallax" src="hero.jpeg" alt="Palermo Bleu">
+<section class="hero">
+  <video autoplay muted loop playsinline src="hero.mp4"></video>
+  <div class="hero-overlay"></div>
+  <div class="hero-fade-bottom"></div>
+  <div class="hero-fade-blur"></div>
+  <img class="hero-logo-corner" src="pb_logo_outline_negro.png" alt="Palermo Bleu">
+  <div class="hero-content">
+    <h1 class="hero-title">Palermo Bleu</h1>
+    <a href="#shop" class="hero-btn"><span>Shop Now</span></a>
   </div>
-  <span class="hero-caption">New Collection — 2026</span>
 </section>
 
-<!-- DUAL IMAGE BAND -->
-<div class="dual-band">
-  <div class="dual-band-item parallax-wrap">
-    <img class="parallax-img" src="editorial-1.jpeg" alt="">
-  </div>
-  <div class="dual-band-item parallax-wrap">
-    <img class="parallax-img" src="editorial-2.jpeg" alt="">
-  </div>
-</div>
-
 <!-- PRODUCT SECTION -->
-<div class="section-header fade-up">
+<div class="section-header fade-up" id="shop">
   <h2 class="section-title">T-Shirts <em>&</em> Tops</h2>
   <span class="section-count">— 1 piece</span>
 </div>
@@ -499,6 +567,7 @@ footer {
 <!-- EDITORIAL BAND 2 -->
 <div class="editorial-band">
   <div class="editorial-item">
+    <!-- <img src="editorial-3.jpg" alt=""> -->
     <div class="editorial-placeholder-a" style="position:absolute;inset:0;"></div>
     <div class="editorial-text">
       <span class="editorial-tag">Palermo Bleu — 2026</span>
@@ -506,6 +575,7 @@ footer {
     </div>
   </div>
   <div class="editorial-item">
+    <!-- <img src="editorial-4.jpg" alt=""> -->
     <div class="editorial-placeholder-b" style="position:absolute;inset:0;"></div>
   </div>
 </div>
@@ -565,11 +635,42 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Escape') closeSidebar();
 });
 
+// ── NAV TRANSPARENTE ──
+function handleNav() {
+  const nav = document.querySelector('nav');
+  const heroH = window.innerHeight;
+  const fadeStart = heroH * 0.55; // empieza el degradado
+  const fadeEnd = heroH;          // fin del hero
+  const scrollY = window.scrollY;
+
+  if (scrollY < fadeStart) {
+    // En el hero puro — blanco
+    nav.classList.remove('scrolled');
+  } else if (scrollY >= fadeEnd) {
+    // Fuera del hero — scrolled (negro)
+    nav.classList.add('scrolled');
+  } else {
+    // En la zona de degradado — transición progresiva
+    const progress = (scrollY - fadeStart) / (fadeEnd - fadeStart);
+    if (progress > 0.5) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+  }
+}
+window.addEventListener('scroll', handleNav, { passive: true });
+handleNav();
+
 // ── PARALLAX ──
 function handleParallax() {
   const scrollY = window.scrollY;
+  // Hero parallax
   const heroEl = document.getElementById('heroParallax');
-  if (heroEl) heroEl.style.transform = `translateY(${scrollY * 0.3}px)`;
+  if (heroEl) {
+    heroEl.style.transform = `translateY(${scrollY * 0.3}px)`;
+  }
+  // Parallax imgs
   document.querySelectorAll('.parallax-img').forEach(img => {
     const rect = img.closest('.parallax-wrap').getBoundingClientRect();
     const offset = (rect.top / window.innerHeight) * 30;
@@ -577,7 +678,7 @@ function handleParallax() {
   });
 }
 
-// ── FADE UP ON SCROLL (solo section-header y brand-strip, no product cards) ──
+// ── FADE UP ON SCROLL ──
 const fadeEls = document.querySelectorAll('.fade-up');
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
@@ -588,6 +689,15 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.12 });
 fadeEls.forEach(el => observer.observe(el));
+
+// ── PRODUCT CARDS FADE ──
+document.querySelectorAll('.product-card').forEach((card, i) => {
+  card.style.opacity = '0';
+  card.style.transform = 'translateY(20px)';
+  card.style.transition = `opacity 0.5s ease ${i * 0.08}s, transform 0.5s ease ${i * 0.08}s`;
+  observer.observe(card);
+  card.classList.add('fade-up');
+});
 
 window.addEventListener('scroll', handleParallax, { passive: true });
 handleParallax();
