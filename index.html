@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Palermo Bleu</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -13,13 +13,12 @@
   --off: #f7f5f2;
   --ink: #1a1a18;
   --muted: #9a9690;
-  --accent: #c1440e;
-  --cobalt: #2e4a7a;
+  --accent: #1a1a18;
   --border: #e8e4de;
 }
 
 html { scroll-behavior: smooth; }
-body { background: var(--white); color: var(--ink); font-family: 'DM Sans', sans-serif; font-weight: 300; overflow-x: hidden; }
+body { background: var(--white); color: var(--ink); font-family: 'Inter', sans-serif; font-weight: 300; overflow-x: hidden; }
 
 /* ── INTRO SCREEN ── */
 .intro {
@@ -87,14 +86,15 @@ nav.hidden { opacity: 0; visibility: hidden; }
 .nav-center { display: flex; justify-content: center; }
 .nav-logo {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 1.15rem; font-weight: 400; letter-spacing: 0.18em;
+  font-size: 1.05rem; font-weight: 400; letter-spacing: 0.18em;
   text-transform: uppercase; color: white; text-decoration: none;
   transition: color 0.5s ease;
 }
 nav.scrolled .nav-logo { color: var(--ink); }
 .nav-right { display: flex; align-items: center; gap: 2rem; justify-content: flex-end; }
 .nav-right a {
-  font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.68rem; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase;
   color: white; text-decoration: none;
   transition: color 0.5s ease, opacity 0.2s;
 }
@@ -134,10 +134,10 @@ nav.scrolled .hamburger span { background: var(--ink); }
 .sidebar-close {
   display: flex; align-items: center; gap: 0.4rem;
   background: none; border: none; cursor: pointer;
-  font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.65rem; font-weight: 400; letter-spacing: 0.14em; text-transform: uppercase;
   color: var(--ink); margin-bottom: 2rem; align-self: flex-start;
-  font-family: 'DM Sans', sans-serif; padding: 0; opacity: 0.65;
-  transition: opacity 0.2s;
+  padding: 0; opacity: 0.65; transition: opacity 0.2s;
 }
 .sidebar-close:hover { opacity: 1; }
 .sidebar-close-x { font-size: 0.85rem; line-height: 1; }
@@ -159,8 +159,8 @@ nav.scrolled .hamburger span { background: var(--ink); }
   width: 100%; background: none; border: none; cursor: pointer;
   display: flex; justify-content: space-between; align-items: center;
   padding: 0.6rem 0;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.88rem; font-weight: 300; letter-spacing: 0.04em;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.78rem; font-weight: 300; letter-spacing: 0.04em;
   color: var(--ink); text-align: left;
   border-bottom: 1px solid rgba(26,26,24,0.07);
   transition: color 0.2s;
@@ -179,7 +179,8 @@ nav.scrolled .hamburger span { background: var(--ink); }
 }
 .sidebar-items a {
   display: block; padding: 0.3rem 0;
-  font-size: 0.78rem; letter-spacing: 0.08em; color: var(--muted);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.72rem; font-weight: 300; letter-spacing: 0.06em; color: var(--muted);
   text-decoration: none; transition: color 0.2s;
 }
 .sidebar-items a:hover { color: var(--ink); }
@@ -189,9 +190,9 @@ nav.scrolled .hamburger span { background: var(--ink); }
   display: flex; align-items: flex-end; justify-content: space-between;
 }
 .sidebar-footer-link {
-  font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.68rem; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase;
   color: var(--muted); text-decoration: none; transition: color 0.2s;
-  font-family: 'DM Sans', sans-serif;
 }
 .sidebar-footer-link:hover { color: var(--ink); }
 .sidebar-logo { width: 56px; height: auto; opacity: 0.2; }
@@ -253,25 +254,31 @@ nav.scrolled .hamburger span { background: var(--ink); }
 .hero-content {
   position: relative; z-index: 2;
   display: flex; flex-direction: column; align-items: center; justify-content: center;
-  text-align: center; gap: 2rem;
+  text-align: center; gap: 1.2rem;
+}
+.hero-subtag {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem; font-weight: 500; letter-spacing: 0.2em;
+  text-transform: uppercase; color: rgba(255,255,255,0.8);
+  opacity: 0; animation: heroFadeUp 0.8s 2s ease forwards;
 }
 .hero-title {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(2.8rem, 7vw, 6rem);
-  font-weight: 300; letter-spacing: 0.22em;
-  text-transform: uppercase; color: white;
-  line-height: 1; opacity: 0;
-  animation: heroFadeUp 1s 2.1s ease forwards;
+  font-size: clamp(1.8rem, 4vw, 3.2rem);
+  font-weight: 300; letter-spacing: 0.06em;
+  color: white; line-height: 1.1;
+  opacity: 0; animation: heroFadeUp 0.9s 2.15s ease forwards;
 }
 .hero-btn {
-  display: inline-block; padding: 0.75rem 2.2rem;
-  border: 1px solid rgba(255,255,255,0.7);
-  font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase;
+  display: inline-block; padding: 0.7rem 2rem;
+  border: 1px solid rgba(255,255,255,0.65);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
   color: white; text-decoration: none;
-  font-family: 'DM Sans', sans-serif;
   position: relative; overflow: hidden;
   transition: color 0.4s ease;
-  opacity: 0; animation: heroFadeUp 1s 2.4s ease forwards;
+  margin-top: 0.4rem;
+  opacity: 0; animation: heroFadeUp 0.9s 2.3s ease forwards;
 }
 .hero-btn::before {
   content: ''; position: absolute; inset: 0;
@@ -283,7 +290,7 @@ nav.scrolled .hamburger span { background: var(--ink); }
 .hero-btn:hover::before { transform: translateX(0); }
 .hero-btn span { position: relative; z-index: 1; }
 @keyframes heroFadeUp {
-  from { opacity: 0; transform: translateY(16px); }
+  from { opacity: 0; transform: translateY(12px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
@@ -327,7 +334,10 @@ nav.scrolled .hamburger span { background: var(--ink); }
   font-weight: 300; letter-spacing: 0.02em;
 }
 .section-title em { font-style: italic; color: var(--accent); }
-.section-count { font-size: 0.72rem; letter-spacing: 0.12em; color: var(--muted); }
+.section-count {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.68rem; font-weight: 400; letter-spacing: 0.1em; color: var(--muted);
+}
 
 /* ── PRODUCT GRID ── */
 .product-grid {
@@ -343,8 +353,7 @@ nav.scrolled .hamburger span { background: var(--ink); }
 }
 .product-thumb {
   aspect-ratio: 3/4; overflow: hidden;
-  background: var(--off);
-  position: relative;
+  background: var(--off); position: relative;
 }
 .product-thumb img {
   position: absolute; inset: 0;
@@ -356,20 +365,23 @@ nav.scrolled .hamburger span { background: var(--ink); }
 .product-card:hover .product-thumb img.front { opacity: 0; transform: scale(1.03); }
 .product-card:hover .product-thumb img.back { opacity: 1; transform: scale(1.03); }
 .product-thumb-placeholder {
-  width: 100%; height: 100%;
-  background: var(--off);
+  width: 100%; height: 100%; background: var(--off);
   display: flex; align-items: center; justify-content: center;
 }
 .product-thumb-placeholder span {
-  font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase;
-  color: var(--muted);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
 }
 .product-info { padding: 1rem 1rem 1.4rem; }
 .product-name {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1rem; font-weight: 400; margin-bottom: 0.25rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.78rem; font-weight: 400; letter-spacing: 0.02em;
+  margin-bottom: 0.3rem; color: var(--ink);
 }
-.product-price { font-size: 0.8rem; color: var(--muted); letter-spacing: 0.04em; }
+.product-price {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem; font-weight: 300; color: var(--muted); letter-spacing: 0.02em;
+}
 
 /* ── EDITORIAL BAND 2 ── */
 .editorial-band {
@@ -413,8 +425,9 @@ nav.scrolled .hamburger span { background: var(--ink); }
 }
 .brand-strip h2 em { font-style: italic; color: var(--accent); }
 .brand-strip p {
-  font-size: 0.85rem; color: var(--muted); line-height: 1.85;
-  letter-spacing: 0.02em;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.82rem; font-weight: 300; color: var(--muted);
+  line-height: 1.9; letter-spacing: 0.01em;
 }
 
 /* ── FOOTER ── */
@@ -431,13 +444,15 @@ footer {
 }
 .footer-col { display: flex; flex-direction: column; gap: 0.6rem; }
 .footer-col a {
-  font-size: 0.75rem; letter-spacing: 0.1em; color: var(--muted);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem; font-weight: 300; letter-spacing: 0.08em; color: var(--muted);
   text-decoration: none; transition: color 0.2s;
 }
 .footer-col a:hover { color: var(--ink); }
 .footer-copy {
-  font-size: 0.68rem; color: var(--muted); letter-spacing: 0.08em;
-  margin-top: 0.5rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.65rem; font-weight: 300; color: var(--muted);
+  letter-spacing: 0.06em; margin-top: 0.5rem;
 }
 
 /* ── ABOUT / CONTACT PAGES ── */
@@ -455,20 +470,22 @@ footer {
 }
 .page-title em { font-style: italic; color: var(--accent); }
 .page-body p {
-  font-size: 0.9rem; color: var(--muted); line-height: 1.95;
-  letter-spacing: 0.02em; margin-bottom: 1.4rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem; font-weight: 300; color: var(--muted);
+  line-height: 1.95; letter-spacing: 0.01em; margin-bottom: 1.4rem;
 }
-.page-body p strong { color: var(--ink); font-weight: 400; }
+.page-body p strong { color: var(--ink); font-weight: 500; }
 .page-back {
   display: inline-flex; align-items: center; gap: 0.5rem;
-  font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.68rem; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase;
   color: var(--muted); text-decoration: none; margin-bottom: 3rem;
   transition: color 0.2s;
 }
 .page-back:hover { color: var(--ink); }
 .contact-email {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.4rem; font-weight: 300;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem; font-weight: 300;
   color: var(--ink); text-decoration: none;
   border-bottom: 1px solid var(--border);
   padding-bottom: 0.3rem;
@@ -476,8 +493,6 @@ footer {
   display: inline-block; margin-top: 1rem;
 }
 .contact-email:hover { border-color: var(--ink); }
-
-/* Nav logo con icono */
 .nav-logo-wrap {
   display: flex; align-items: center; gap: 0.6rem;
   text-decoration: none;
@@ -593,6 +608,7 @@ nav.scrolled .nav-logo-icon { filter: brightness(0); }
   <div class="hero-fade-blur"></div>
   <img class="hero-logo-corner" src="pb_logo_outline_negro.png" alt="Palermo Bleu">
   <div class="hero-content">
+    <span class="hero-subtag">SS26 — Barcelona</span>
     <h1 class="hero-title">Palermo Bleu</h1>
     <a href="#shop" class="hero-btn"><span>Shop Now</span></a>
   </div>
