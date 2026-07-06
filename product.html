@@ -54,14 +54,10 @@ nav {
   background: #e0dbd4;
   align-content: start;
 }
-/* Primera foto ocupa las 2 columnas (foto principal grande) */
-.gallery-photo:first-child {
-  grid-column: 1 / -1;
-}
 .gallery-photo {
   position: relative;
   width: 100%;
-  aspect-ratio: 4/5;
+  aspect-ratio: 3/4;
   overflow: hidden;
   background: var(--off);
   cursor: zoom-in;
@@ -256,13 +252,11 @@ nav {
 @media (max-width: 900px) {
   .product-page { grid-template-columns: 1fr; }
   .gallery { grid-template-columns: 1fr 1fr; }
-  .gallery-photo:first-child { grid-column: 1 / -1; }
   .product-info { border-left: none; border-top: 1px solid var(--border); padding: 2rem 1.2rem 3rem; position: relative; top: 0; height: auto; }
   .lightbox-nav { display: none; }
 }
 @media (max-width: 480px) {
   .gallery { grid-template-columns: 1fr; }
-  .gallery-photo:first-child { grid-column: 1; }
 }
 </style>
 </head>
