@@ -4,81 +4,42 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Printed Essential White Tee — Palermo Bleu</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
-  --white: #ffffff;
-  --off: #f7f5f2;
-  --ink: #1a1a18;
-  --muted: #9a9690;
-  --accent: #c1440e;
-  --border: #e8e4de;
+  --white: #ffffff; --off: #f7f5f2; --ink: #1a1a18;
+  --muted: #9a9690; --border: #e8e4de;
 }
 html { scroll-behavior: smooth; }
-body { background: var(--white); color: var(--ink); font-family: 'DM Sans', sans-serif; font-weight: 300; overflow-x: hidden; }
+body { background: var(--white); color: var(--ink); font-family: 'Inter', sans-serif; font-weight: 300; overflow-x: hidden; }
 
-/* ── NAV ── */
+/* NAV */
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 0 2rem; height: 56px;
+  display: grid; grid-template-columns: 1fr auto 1fr;
+  align-items: center; padding: 0 2rem; height: 56px;
   background: rgba(255,255,255,0.92); backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--border);
 }
-.nav-logo {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.15rem; font-weight: 400; letter-spacing: 0.18em;
-  text-transform: uppercase; color: var(--ink); text-decoration: none;
-}
-.nav-right { display: flex; align-items: center; gap: 2rem; }
-.nav-right a { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
-.nav-right a:hover { color: var(--ink); }
-.nav-back { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; display: flex; align-items: center; gap: 0.4rem; }
+.nav-back { font-family: 'Inter', sans-serif; font-size: 0.68rem; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
 .nav-back:hover { color: var(--ink); }
+.nav-logo-wrap { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; justify-content: center; }
+.nav-logo-icon { width: 20px; height: auto; opacity: 0.8; filter: brightness(0); }
+.nav-logo { font-family: 'EB Garamond', serif; font-size: 1.05rem; font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink); }
+.nav-right { display: flex; align-items: center; gap: 2rem; justify-content: flex-end; }
+.nav-right a { font-family: 'Inter', sans-serif; font-size: 0.68rem; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.nav-right a:hover { color: var(--ink); }
 
-/* ── PRODUCT LAYOUT ── */
-.product-page {
-  margin-top: 56px;
-  display: grid;
-  grid-template-columns: 1fr 420px;
-  min-height: calc(100vh - 56px);
-  align-items: start;
-}
+/* PRODUCT LAYOUT */
+.product-page { margin-top: 56px; display: grid; grid-template-columns: 1fr 420px; min-height: calc(100vh - 56px); }
 
-/* ── LEFT: GALLERY ── */
-.gallery {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3px;
-  background: #e0dbd4;
-  align-content: start;
-}
-.gallery-photo {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 3/4;
-  overflow: hidden;
-  background: var(--off);
-  cursor: zoom-in;
-}
-.gallery-photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center top;
-  transition: transform 0.5s ease;
-}
+/* GALLERY */
+.gallery { display: flex; flex-direction: column; gap: 3px; background: #e0dbd4; }
+.gallery-photo { position: relative; width: 100%; aspect-ratio: 4/5; overflow: hidden; background: var(--off); cursor: zoom-in; }
+.gallery-photo img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
 .gallery-photo:hover img { transform: scale(1.02); }
-.gallery-placeholder {
-  width: 100%; height: 100%;
-  display: flex; align-items: center; justify-content: center;
-}
-.gallery-placeholder span {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 0.85rem; font-style: italic;
-  color: rgba(26,26,24,0.2); letter-spacing: 0.1em;
-}
+.gallery-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
 .ph-1 { background: linear-gradient(160deg, #e8e2d8 0%, #d8d0c4 100%); }
 .ph-2 { background: linear-gradient(160deg, #ddd7cc 0%, #cdc6b8 100%); }
 .ph-3 { background: linear-gradient(160deg, #e2dcd4 0%, #d0c8bc 100%); }
@@ -86,273 +47,155 @@ nav {
 .ph-5 { background: linear-gradient(160deg, #e0dad2 0%, #d4ccbe 100%); }
 .ph-6 { background: linear-gradient(160deg, #dcd6ce 0%, #ccc4b6 100%); }
 .ph-7 { background: linear-gradient(160deg, #e4ded8 0%, #d6cec2 100%); }
-.ph-8 { background: linear-gradient(160deg, #dad4cc 0%, #cac2b4 100%); }
-.ph-9 { background: linear-gradient(160deg, #e2dcd2 0%, #d2cabb 100%); }
 
-/* ── RIGHT: PRODUCT INFO (sticky) ── */
+/* PRODUCT INFO */
 .product-info {
-  position: sticky; top: 56px;
-  height: calc(100vh - 56px);
-  overflow-y: auto;
-  padding: 3rem 2.5rem 4rem;
-  border-left: 1px solid var(--border);
-  scrollbar-width: none;
+  position: sticky; top: 56px; height: calc(100vh - 56px);
+  overflow-y: auto; padding: 3rem 2.5rem 4rem;
+  border-left: 1px solid var(--border); scrollbar-width: none;
 }
 .product-info::-webkit-scrollbar { display: none; }
-.product-breadcrumb {
-  font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase;
-  color: var(--muted); margin-bottom: 2rem;
-  display: flex; align-items: center; gap: 0.5rem;
-}
-.product-breadcrumb a { color: var(--muted); text-decoration: none; }
+.product-breadcrumb { font-family: 'Inter', sans-serif; font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 2rem; display: flex; align-items: center; gap: 0.5rem; }
+.product-breadcrumb a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
 .product-breadcrumb a:hover { color: var(--ink); }
-.product-name {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 2rem; font-weight: 300; line-height: 1.15;
-  letter-spacing: 0.01em; margin-bottom: 0.6rem;
-}
-.product-price {
-  font-size: 1rem; letter-spacing: 0.06em;
-  color: var(--ink); margin-bottom: 2rem;
-}
+.product-name { font-family: 'Inter', sans-serif; font-size: 1rem; font-weight: 400; letter-spacing: 0.02em; margin-bottom: 0.5rem; }
+.product-price { font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 300; color: var(--muted); margin-bottom: 2rem; }
 
-/* Size selector */
-.size-label {
-  font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase;
-  color: var(--muted); margin-bottom: 0.8rem;
-  display: flex; justify-content: space-between; align-items: center;
-}
-.size-guide-link {
-  font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase;
-  color: var(--muted); text-decoration: underline; cursor: pointer;
-  background: none; border: none; font-family: 'DM Sans', sans-serif;
-}
-.size-grid {
-  display: grid; grid-template-columns: repeat(5, 1fr);
-  gap: 6px; margin-bottom: 1.8rem;
-}
-.size-btn {
-  height: 44px; background: none;
-  border: 1px solid var(--border);
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.75rem; letter-spacing: 0.1em;
-  color: var(--ink); cursor: pointer;
-  transition: all 0.2s;
-}
+/* SIZE SELECTOR */
+.size-label { font-family: 'Inter', sans-serif; font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.8rem; display: flex; justify-content: space-between; align-items: center; }
+.size-guide-link { font-family: 'Inter', sans-serif; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-decoration: underline; cursor: pointer; background: none; border: none; }
+.size-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin-bottom: 1.8rem; }
+.size-btn { height: 44px; background: none; border: 1px solid var(--border); font-family: 'Inter', sans-serif; font-size: 0.72rem; letter-spacing: 0.1em; color: var(--ink); cursor: pointer; transition: all 0.2s; }
 .size-btn:hover { border-color: var(--ink); }
 .size-btn.selected { background: var(--ink); color: var(--white); border-color: var(--ink); }
 
-/* Buy button */
+/* BUY BUTTON */
+.size-warning { font-family: 'Inter', sans-serif; font-size: 0.72rem; color: #888; letter-spacing: 0.06em; margin-bottom: 0.75rem; display: none; }
 .btn-buy {
-  width: 100%; height: 52px;
-  background: var(--ink); color: var(--white);
-  border: none; cursor: pointer;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase;
+  width: 100%; height: 52px; background: var(--ink); color: var(--white);
+  border: none; cursor: pointer; font-family: 'Inter', sans-serif;
+  font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
   transition: background 0.2s; margin-bottom: 0.75rem;
   text-decoration: none; display: flex; align-items: center; justify-content: center;
 }
 .btn-buy:hover { background: #333; }
 .btn-buy.disabled { background: var(--border); color: var(--muted); cursor: not-allowed; pointer-events: none; }
-.size-warning {
-  font-size: 0.72rem; color: var(--accent); letter-spacing: 0.06em;
-  margin-bottom: 0.75rem; display: none;
-}
-.btn-wishlist {
-  width: 100%; height: 44px;
-  background: none; color: var(--ink);
-  border: 1px solid var(--border); cursor: pointer;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
-  transition: border-color 0.2s; margin-bottom: 2.5rem;
-}
+.btn-wishlist { width: 100%; height: 44px; background: none; color: var(--ink); border: 1px solid var(--border); cursor: pointer; font-family: 'Inter', sans-serif; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; transition: border-color 0.2s; margin-bottom: 2.5rem; }
 .btn-wishlist:hover { border-color: var(--ink); }
 
 .info-divider { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
 
-/* Accordion */
+/* ACCORDION */
 .accordion-item { border-bottom: 1px solid var(--border); }
-.accordion-btn {
-  width: 100%; background: none; border: none; cursor: pointer;
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 1.1rem 0;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase;
-  color: var(--ink); text-align: left;
-}
+.accordion-btn { width: 100%; background: none; border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 1.1rem 0; font-family: 'Inter', sans-serif; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink); text-align: left; }
 .accordion-arrow { font-size: 1rem; color: var(--muted); transition: transform 0.25s; }
 .accordion-item.open .accordion-arrow { transform: rotate(45deg); }
 .accordion-content { display: none; padding-bottom: 1.2rem; }
 .accordion-item.open .accordion-content { display: block; }
-.accordion-content p {
-  font-size: 0.82rem; color: var(--muted); line-height: 1.85; letter-spacing: 0.02em;
-}
+.accordion-content p { font-family: 'Inter', sans-serif; font-size: 0.8rem; font-weight: 300; color: var(--muted); line-height: 1.85; }
 .accordion-content ul { list-style: none; margin-top: 0.6rem; }
-.accordion-content ul li {
-  font-size: 0.8rem; color: var(--muted); line-height: 1.85;
-  padding-left: 1rem; position: relative;
-}
+.accordion-content ul li { font-family: 'Inter', sans-serif; font-size: 0.78rem; font-weight: 300; color: var(--muted); line-height: 1.85; padding-left: 1rem; position: relative; }
 .accordion-content ul li::before { content: '—'; position: absolute; left: 0; color: var(--border); }
 
-/* ── LIGHTBOX ── */
-.lightbox {
-  display: none; position: fixed; inset: 0; z-index: 999;
-  background: rgba(0,0,0,0.95);
-  align-items: center; justify-content: center;
-}
-.lightbox.active { display: flex; }
-.lightbox-inner { position: relative; max-width: 90vw; max-height: 90vh; }
-.lightbox-inner img { max-width: 90vw; max-height: 90vh; object-fit: contain; }
-.lightbox-close {
-  position: fixed; top: 1.5rem; right: 1.8rem;
-  background: none; border: none; color: rgba(255,255,255,0.5);
-  font-size: 2rem; cursor: pointer; line-height: 1; transition: color 0.2s;
-}
-.lightbox-close:hover { color: white; }
-.lightbox-nav {
-  position: fixed; top: 50%; transform: translateY(-50%);
-  background: none; border: none; color: rgba(255,255,255,0.4);
-  font-size: 3rem; cursor: pointer; padding: 1rem; transition: color 0.2s; line-height: 1;
-}
-.lightbox-nav:hover { color: white; }
-.lightbox-prev { left: 0.5rem; }
-.lightbox-next { right: 0.5rem; }
-.lightbox-counter {
-  position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%);
-  font-size: 0.7rem; letter-spacing: 0.14em; color: rgba(255,255,255,0.4);
-}
-
-/* ── SIZE GUIDE MODAL ── */
-.modal {
-  display: none; position: fixed; inset: 0; z-index: 999;
-  background: rgba(0,0,0,0.5); align-items: center; justify-content: center;
-}
+/* SIZE GUIDE MODAL */
+.modal { display: none; position: fixed; inset: 0; z-index: 999; background: rgba(0,0,0,0.5); align-items: center; justify-content: center; }
 .modal.active { display: flex; }
-.modal-box {
-  background: var(--white); padding: 2.5rem; max-width: 480px; width: 90%;
-  position: relative;
-}
-.modal-close {
-  position: absolute; top: 1rem; right: 1.2rem;
-  background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--muted);
-}
-.modal-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.3rem; font-weight: 300; margin-bottom: 1.5rem;
-}
+.modal-box { background: var(--white); padding: 2.5rem; max-width: 480px; width: 90%; position: relative; }
+.modal-close { position: absolute; top: 1rem; right: 1.2rem; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--muted); }
+.modal-title { font-family: 'EB Garamond', serif; font-size: 1.3rem; font-weight: 400; margin-bottom: 1.5rem; }
 .size-table { width: 100%; border-collapse: collapse; }
-.size-table th, .size-table td {
-  padding: 0.65rem 0.8rem; text-align: center;
-  font-size: 0.78rem; border-bottom: 1px solid var(--border); color: var(--muted);
-}
+.size-table th, .size-table td { padding: 0.65rem 0.8rem; text-align: center; font-family: 'Inter', sans-serif; font-size: 0.78rem; border-bottom: 1px solid var(--border); color: var(--muted); }
 .size-table th { font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.65rem; }
 .size-table td:first-child { font-weight: 400; color: var(--ink); }
 
-/* ── RESPONSIVE ── */
+/* LIGHTBOX */
+.lightbox { display: none; position: fixed; inset: 0; z-index: 999; background: rgba(0,0,0,0.93); align-items: center; justify-content: center; }
+.lightbox.active { display: flex; }
+.lightbox-inner { position: relative; max-width: 90vw; max-height: 90vh; }
+.lightbox-inner img { max-width: 90vw; max-height: 90vh; object-fit: contain; }
+.lightbox-close { position: fixed; top: 1.5rem; right: 1.8rem; background: none; border: none; color: rgba(255,255,255,0.5); font-size: 2rem; cursor: pointer; line-height: 1; transition: color 0.2s; }
+.lightbox-close:hover { color: white; }
+.lightbox-nav { position: fixed; top: 50%; transform: translateY(-50%); background: none; border: none; color: rgba(255,255,255,0.4); font-size: 3rem; cursor: pointer; padding: 1rem; transition: color 0.2s; line-height: 1; }
+.lightbox-nav:hover { color: white; }
+.lightbox-prev { left: 0.5rem; }
+.lightbox-next { right: 0.5rem; }
+.lightbox-counter { position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%); font-family: 'Inter', sans-serif; font-size: 0.7rem; letter-spacing: 0.14em; color: rgba(255,255,255,0.4); }
+
 @media (max-width: 900px) {
   .product-page { grid-template-columns: 1fr; }
-  .gallery { grid-template-columns: 1fr 1fr; }
-  .product-info { border-left: none; border-top: 1px solid var(--border); padding: 2rem 1.2rem 3rem; position: relative; top: 0; height: auto; }
+  .product-info { position: relative; top: 0; height: auto; border-left: none; border-top: 1px solid var(--border); padding: 2rem 1.2rem 3rem; }
   .lightbox-nav { display: none; }
-}
-@media (max-width: 480px) {
-  .gallery { grid-template-columns: 1fr; }
 }
 </style>
 </head>
 <body>
 
-<!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox" onclick="closeLightboxBg(event)">
   <button class="lightbox-close" onclick="closeLightbox()">×</button>
   <button class="lightbox-nav lightbox-prev" onclick="lightboxNav(-1)">‹</button>
-  <div class="lightbox-inner">
-    <img id="lightboxImg" src="" alt="">
-  </div>
+  <div class="lightbox-inner"><img id="lightboxImg" src="" alt=""></div>
   <button class="lightbox-nav lightbox-next" onclick="lightboxNav(1)">›</button>
   <div class="lightbox-counter" id="lightboxCounter"></div>
 </div>
 
-<!-- SIZE GUIDE MODAL -->
 <div class="modal" id="sizeModal" onclick="closeSizeModalBg(event)">
   <div class="modal-box">
     <button class="modal-close" onclick="closeSizeModal()">×</button>
     <p class="modal-title">Size Guide</p>
     <table class="size-table">
-      <thead>
-        <tr><th>Size</th><th>Chest (cm)</th><th>Length (cm)</th><th>Shoulder (cm)</th></tr>
-      </thead>
+      <thead><tr><th>Size</th><th>Chest (cm)</th><th>Length (cm)</th><th>Width (cm)</th></tr></thead>
       <tbody>
-        <tr><td>XS</td><td>88–92</td><td>68</td><td>42</td></tr>
-        <tr><td>S</td><td>92–96</td><td>70</td><td>44</td></tr>
-        <tr><td>M</td><td>96–100</td><td>72</td><td>46</td></tr>
-        <tr><td>L</td><td>100–106</td><td>74</td><td>48</td></tr>
-        <tr><td>XL</td><td>106–112</td><td>76</td><td>50</td></tr>
+        <tr><td>XS</td><td>82</td><td>68</td><td>41</td></tr>
+        <tr><td>S</td><td>92</td><td>71</td><td>46</td></tr>
+        <tr><td>M</td><td>102</td><td>73</td><td>51</td></tr>
+        <tr><td>L</td><td>112</td><td>76</td><td>56</td></tr>
+        <tr><td>XL</td><td>122</td><td>78</td><td>61</td></tr>
       </tbody>
     </table>
   </div>
 </div>
 
-<!-- NAV -->
 <nav>
   <a href="index.html" class="nav-back">← Back</a>
-  <a href="index.html" class="nav-logo">Palermo Bleu</a>
+  <a href="index.html" class="nav-logo-wrap">
+    <img class="nav-logo-icon" src="pb_logo_outline_negro.png" alt="">
+    <span class="nav-logo">Palermo Bleu</span>
+  </a>
   <div class="nav-right">
-    <a href="#">About</a>
-    <a href="#">Contact</a>
+    <a href="index.html">Shop</a>
   </div>
 </nav>
 
-<!-- PRODUCT PAGE -->
 <div class="product-page">
 
-  <!-- GALLERY -->
   <div class="gallery">
-
     <div class="gallery-photo" onclick="openLightbox(0)">
       <img src="tee-front.png" alt="Printed Essential White Tee — Front">
     </div>
-
     <div class="gallery-photo" onclick="openLightbox(1)">
       <img src="tee-back.jpeg" alt="Printed Essential White Tee — Back">
     </div>
-
     <div class="gallery-photo" onclick="openLightbox(2)">
-      <img src="modelo1.png" alt="Printed Essential White Tee">
+      <div class="gallery-placeholder ph-3"></div>
     </div>
-
     <div class="gallery-photo" onclick="openLightbox(3)">
-      <div class="gallery-placeholder ph-4"><span>Photo 04</span></div>
+      <div class="gallery-placeholder ph-4"></div>
     </div>
-
     <div class="gallery-photo" onclick="openLightbox(4)">
-      <div class="gallery-placeholder ph-5"><span>Photo 05</span></div>
+      <div class="gallery-placeholder ph-5"></div>
     </div>
-
     <div class="gallery-photo" onclick="openLightbox(5)">
-      <div class="gallery-placeholder ph-6"><span>Photo 06</span></div>
+      <div class="gallery-placeholder ph-6"></div>
     </div>
-
     <div class="gallery-photo" onclick="openLightbox(6)">
-      <div class="gallery-placeholder ph-7"><span>Photo 07</span></div>
+      <div class="gallery-placeholder ph-7"></div>
     </div>
-
-    <div class="gallery-photo" onclick="openLightbox(7)">
-      <div class="gallery-placeholder ph-8"><span>Photo 08</span></div>
-    </div>
-
-    <div class="gallery-photo" onclick="openLightbox(8)">
-      <div class="gallery-placeholder ph-9"><span>Photo 09</span></div>
-    </div>
-
   </div>
 
-  <!-- PRODUCT INFO -->
   <div class="product-info">
     <p class="product-breadcrumb">
       <a href="index.html">Home</a> › <a href="#">T-Shirts</a> › Printed Essential White Tee
     </p>
-
     <h1 class="product-name">Printed Essential White Tee</h1>
     <p class="product-price">€ 55</p>
 
@@ -360,41 +203,35 @@ nav {
       <span>Select size</span>
       <button class="size-guide-link" onclick="openSizeModal()">Size guide</button>
     </div>
-
     <div class="size-grid">
-      <button class="size-btn" onclick="selectSize(this, 'XS')">XS</button>
-      <button class="size-btn" onclick="selectSize(this, 'S')">S</button>
-      <button class="size-btn" onclick="selectSize(this, 'M')">M</button>
-      <button class="size-btn" onclick="selectSize(this, 'L')">L</button>
-      <button class="size-btn" onclick="selectSize(this, 'XL')">XL</button>
+      <button class="size-btn" onclick="selectSize(this,'XS')">XS</button>
+      <button class="size-btn" onclick="selectSize(this,'S')">S</button>
+      <button class="size-btn" onclick="selectSize(this,'M')">M</button>
+      <button class="size-btn" onclick="selectSize(this,'L')">L</button>
+      <button class="size-btn" onclick="selectSize(this,'XL')">XL</button>
     </div>
 
     <p class="size-warning" id="sizeWarning">Please select a size</p>
-
     <a href="#" class="btn-buy disabled" id="btnBuy" onclick="handleBuy(event)">Add to cart</a>
     <button class="btn-wishlist">Save to wishlist</button>
 
     <hr class="info-divider">
 
     <div class="accordion-item" id="acc-details">
-      <button class="accordion-btn" onclick="toggleAccordion('acc-details')">
-        Details <span class="accordion-arrow">+</span>
-      </button>
+      <button class="accordion-btn" onclick="toggleAccordion('acc-details')">Details <span class="accordion-arrow">+</span></button>
       <div class="accordion-content">
-        <p>100% premium cotton. Regular fit with a slightly dropped shoulder. Ribbed crew neck. Pre-washed for softness from day one.</p>
+        <p>100% cotton. Regular fit. Screen-printed front graphic. Unisex sizing.</p>
         <ul>
-          <li>Garment dyed</li>
-          <li>Ribbed collar</li>
-          <li>Side seams</li>
-          <li>Made in Portugal</li>
+          <li>Screen-printed front graphic</li>
+          <li>Regular fit</li>
+          <li>Ribbed crew neck</li>
+          <li>Pre-washed for softness</li>
         </ul>
       </div>
     </div>
 
     <div class="accordion-item" id="acc-care">
-      <button class="accordion-btn" onclick="toggleAccordion('acc-care')">
-        Care <span class="accordion-arrow">+</span>
-      </button>
+      <button class="accordion-btn" onclick="toggleAccordion('acc-care')">Care <span class="accordion-arrow">+</span></button>
       <div class="accordion-content">
         <ul>
           <li>Machine wash at 30°C</li>
@@ -406,14 +243,11 @@ nav {
     </div>
 
     <div class="accordion-item" id="acc-shipping">
-      <button class="accordion-btn" onclick="toggleAccordion('acc-shipping')">
-        Shipping & Returns <span class="accordion-arrow">+</span>
-      </button>
+      <button class="accordion-btn" onclick="toggleAccordion('acc-shipping')">Shipping & Returns <span class="accordion-arrow">+</span></button>
       <div class="accordion-content">
-        <p>Free shipping on orders over €100. Standard delivery 3–5 business days. Returns accepted within 14 days of delivery — items must be unworn and in original condition.</p>
+        <p>Standard delivery 3–7 business days. Returns accepted within 14 days of delivery — items must be unworn and in original condition.</p>
       </div>
     </div>
-
   </div>
 </div>
 
@@ -421,20 +255,19 @@ nav {
 const photos = [
   'tee-front.png',
   'tee-back.jpeg',
-  'modelo1.png',
-  '', '', '', '', '', ''
+  '', '', '', '', ''
 ];
+
+const stripeLinks = {
+  'XS': 'https://buy.stripe.com/dRm5kCfPn78dcWN86L57W00',
+  'S':  'https://buy.stripe.com/cNi00i6eNbot2i90Ej57W01',
+  'M':  'https://buy.stripe.com/eVq7sKav3akp6yp86L57W02',
+  'L':  'https://buy.stripe.com/bJecN49qZgIN4qh2Mr57W03',
+  'XL': 'https://buy.stripe.com/4gM3cu32B9gl1e50Ej57W04'
+};
 
 let currentImg = 0;
 let selectedSize = null;
-
-const stripeLinks = {
-  'XS': 'https://buy.stripe.com/00w6oJ0pWdAI8PifZmew800',
-  'S':  'https://buy.stripe.com/6oU28t4Gcaowd5ybJ6ew801',
-  'M':  'https://buy.stripe.com/aFafZj5Kg68gghK9AYew802',
-  'L':  'https://buy.stripe.com/cNi8wRc8EfIQe9C4gEew803',
-  'XL': 'https://buy.stripe.com/eVq5kFfkQbsA8PifZmew804'
-};
 
 function selectSize(btn, size) {
   document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('selected'));
@@ -502,6 +335,5 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowLeft') lightboxNav(-1);
 });
 </script>
-
 </body>
 </html>
