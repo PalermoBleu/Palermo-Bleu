@@ -35,7 +35,7 @@ nav {
 .product-page { margin-top: 56px; display: grid; grid-template-columns: 1fr 420px; min-height: calc(100vh - 56px); }
 
 /* GALLERY */
-.gallery { display: flex; flex-direction: column; gap: 3px; background: #e0dbd4; }
+.gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; background: #e0dbd4; align-content: start; }
 .gallery-photo { position: relative; width: 100%; aspect-ratio: 4/5; overflow: hidden; background: var(--off); cursor: zoom-in; }
 .gallery-photo img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
 .gallery-photo:hover img { transform: scale(1.02); }
