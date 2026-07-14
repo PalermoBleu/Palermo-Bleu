@@ -62,7 +62,8 @@ nav.scrolled .nav-icon-btn { color: var(--ink); }
 .sidebar-overlay { position: fixed; inset: 0; z-index: 350; background: rgba(0,0,0,0.08); opacity: 0; pointer-events: none; transition: opacity 0.4s; }
 .sidebar-overlay.visible { opacity: 1; pointer-events: all; }
 @media (max-width: 640px) { .sidebar { top: 0; left: 0; right: 0; bottom: 0; width: 100%; border-radius: 0; border: none; } }
-.hero { position: relative; width: 100%; height: 100vh; overflow: hidden; background: #111; display: flex; align-items: center; justify-content: center; }
+.hero { position: sticky; top: 0; z-index: 0; width: 100%; height: 100vh; overflow: hidden; background: #111; display: flex; align-items: center; justify-content: center; }
+.content-reveal { position: relative; z-index: 1; background: var(--white); }
 .hero video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.85; }
 .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.3) 100%); }
 .hero-fade-bottom { position: absolute; bottom: 0; left: 0; right: 0; height: 65vh; z-index: 2; background: linear-gradient(to top, rgba(255,255,255,1) 0%, rgba(255,255,255,0.95) 8%, rgba(255,255,255,0.8) 20%, rgba(255,255,255,0.55) 38%, rgba(255,255,255,0.28) 55%, rgba(255,255,255,0.08) 72%, rgba(255,255,255,0) 100%); pointer-events: none; }
@@ -130,8 +131,9 @@ nav.scrolled .nav-logo-icon { filter: brightness(0); }
   .product-grid { grid-template-columns: repeat(2, 1fr); }
   .editorial-band { grid-template-columns: 1fr; }
   footer { grid-template-columns: 1fr 1fr; }
-  .hero { position: sticky; top: 0; z-index: 0; }
-  .content-reveal { position: relative; z-index: 1; background: var(--white); }
+  .hero { height: 100vw; max-height: 100vh; }
+  .hero-fade-bottom { height: 55%; }
+  .hero-fade-blur { height: 40%; }
 }
 @media (max-width: 640px) { nav { top: 12px; left: 12px; right: 12px; padding: 0 1rem; height: 48px; } .nav-left, .nav-right { gap: 0.8rem; } .section-header { padding: 3rem 1.2rem 1.5rem; } .brand-strip { padding: 3.5rem 1.2rem; } footer { grid-template-columns: 1fr; padding: 2rem 1.2rem; } }
 </style>
