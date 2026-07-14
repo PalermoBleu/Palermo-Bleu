@@ -21,9 +21,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:grid;grid-template-c
 .nav-right a:hover{color:var(--ink);}
 .product-page{margin-top:56px;display:grid;grid-template-columns:1fr 420px;min-height:calc(100vh - 56px);}
 .gallery{display:flex;flex-direction:column;gap:3px;background:#e0dbd4;}
-.gallery-photo{position:relative;width:100%;aspect-ratio:1/1;overflow:hidden;background:var(--off);cursor:zoom-in;}
-.gallery-photo img{width:100%;height:100%;object-fit:cover;transition:transform 0.4s ease;}
-.gallery-photo:hover img{transform:scale(1.02);}
+.gallery-photo{position:relative;width:100%;aspect-ratio:1/1;overflow:hidden;background:var(--white);cursor:zoom-in;display:flex;align-items:center;justify-content:center;padding:2.5rem;border-bottom:3px solid #e0dbd4;}
+.gallery-photo img{width:100%;height:100%;object-fit:contain;transition:transform 0.4s ease;}
+.gallery-photo:hover img{transform:scale(1.03);}
 .gallery-placeholder{width:100%;height:100%;}
 .ph-navy{background:#1e2d4a;}
 .ph-khaki{background:#7a8c6a;}
