@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Palermo Bleu</title>
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script type="module" src="https://unpkg.com/@google/model-viewer@3.5.0/dist/model-viewer.min.js"></script>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root { --white: #ffffff; --off: #f7f5f2; --ink: #1a1a18; --muted: #9a9690; --accent: #1a1a18; --border: #e8e4de; }
@@ -106,6 +107,10 @@ nav.scrolled .nav-icon-btn { color: var(--ink); }
 .editorial-text { position: relative; z-index: 2; padding: 2.5rem; align-self: flex-end; width: 100%; }
 .editorial-tag { font-family: 'Inter', sans-serif; font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 0.6rem; display: block; }
 .editorial-headline { font-family: 'Inter', sans-serif; font-size: clamp(1.1rem, 2.4vw, 1.5rem); font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: rgba(255,255,255,0.92); line-height: 1.4; }
+.editorial-3d-logo { position: absolute; top: 1.6rem; right: 1.6rem; width: 160px; height: 160px; z-index: 3; cursor: grab; --poster-color: transparent; background-color: transparent; }
+.editorial-3d-logo:active { cursor: grabbing; }
+@media (max-width: 900px) { .editorial-3d-logo { width: 130px; height: 130px; } }
+@media (max-width: 640px) { .editorial-3d-logo { width: 100px; height: 100px; top: 1.2rem; right: 1.2rem; } }
 .brand-strip { padding: 5rem 2rem; max-width: 640px; margin: 0 auto; text-align: center; }
 .brand-strip h2 { font-family: 'Inter', sans-serif; font-size: clamp(1.15rem, 2.6vw, 1.5rem); font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; line-height: 1.7; margin-bottom: 1.5rem; }
 .brand-strip p { font-family: 'Inter', sans-serif; font-size: 0.82rem; font-weight: 300; color: var(--muted); line-height: 1.9; }
@@ -233,6 +238,20 @@ nav.scrolled .nav-logo-icon { filter: brightness(0); }
 <div class="editorial-band">
   <div class="editorial-item">
     <div class="editorial-placeholder-a" style="position:absolute;inset:0;"></div>
+    <model-viewer
+      id="logo3d"
+      class="editorial-3d-logo"
+      src="palermo-bleu-cross-3d.glb"
+      alt="Palermo Bleu 3D logo"
+      camera-controls
+      disable-zoom
+      touch-action="pan-y"
+      auto-rotate
+      rotation-per-second="18deg"
+      interaction-prompt="none"
+      shadow-intensity="0"
+      exposure="1.1"
+    ></model-viewer>
     <div class="editorial-text">
       <span class="editorial-tag">Palermo Bleu — 2026</span>
       <p class="editorial-headline">Colour as memory.<br>Cloth as character.</p>
@@ -283,6 +302,22 @@ function handleNav(){const nav=document.querySelector('body > nav');if(window.sc
 window.addEventListener('scroll',handleNav,{passive:true});handleNav();
 const observer=new IntersectionObserver((entries)=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target);}});},{threshold:0.08});
 document.querySelectorAll('.fade-up').forEach(el=>observer.observe(el));
+
+const logo3d=document.getElementById('logo3d');
+if(logo3d){
+  const idleSpeed=18,burstSpeed=260;
+  let decayTimer=null;
+  logo3d.addEventListener('click',()=>{
+    if(decayTimer)clearInterval(decayTimer);
+    let speed=burstSpeed;
+    logo3d.setAttribute('rotation-per-second',speed+'deg');
+    decayTimer=setInterval(()=>{
+      speed-=10;
+      if(speed<=idleSpeed){speed=idleSpeed;clearInterval(decayTimer);decayTimer=null;}
+      logo3d.setAttribute('rotation-per-second',speed+'deg');
+    },50);
+  });
+}
 </script>
 </body>
 </html>
