@@ -69,8 +69,6 @@ nav.scrolled .nav-icon-btn { color: var(--ink); }
 .hero-split-item img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .hero-placeholder { position: absolute; inset: 0; width: 100%; height: 100%; background: linear-gradient(160deg, #e8e2d8 0%, #d8d0c4 100%); }
 .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.3) 100%); }
-.hero-fade-bottom { position: absolute; bottom: 0; left: 0; right: 0; height: 42%; z-index: 2; background: linear-gradient(to top, rgba(255,255,255,1) 0%, rgba(255,255,255,0.95) 8%, rgba(255,255,255,0.8) 20%, rgba(255,255,255,0.55) 38%, rgba(255,255,255,0.28) 55%, rgba(255,255,255,0.08) 72%, rgba(255,255,255,0) 100%); pointer-events: none; }
-.hero-fade-blur { position: absolute; bottom: 0; left: 0; right: 0; height: 30%; z-index: 1; backdrop-filter: blur(3px) saturate(1.1); -webkit-backdrop-filter: blur(3px) saturate(1.1); mask-image: linear-gradient(to top, black 0%, black 15%, rgba(0,0,0,0.5) 40%, transparent 100%); -webkit-mask-image: linear-gradient(to top, black 0%, black 15%, rgba(0,0,0,0.5) 40%, transparent 100%); pointer-events: none; }
 .hero-logo-corner { position: absolute; bottom: 2.2rem; right: 2rem; z-index: 3; width: 52px; height: auto; opacity: 0.35; filter: brightness(0) invert(1); pointer-events: none; }
 .hero-content { position: absolute; inset: 0; z-index: 2; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 1.2rem; }
 .hero-subtag { font-family: 'Inter', sans-serif; font-size: 0.7rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.8); opacity: 0; animation: heroFadeUp 0.8s 2s ease forwards; }
@@ -183,8 +181,6 @@ nav.scrolled .nav-logo-icon { filter: brightness(0); }
     <div class="hero-split-item"><img src="hero-left.jpg" alt="Palermo Bleu — Surf, Barcelona"></div>
   </div>
   <div class="hero-overlay"></div>
-  <div class="hero-fade-bottom"></div>
-  <div class="hero-fade-blur"></div>
   <img class="hero-logo-corner" src="pb_logo_outline_negro.png" alt="Palermo Bleu">
   <div class="hero-content">
     <span class="hero-subtag">SS26 — Barcelona</span>
