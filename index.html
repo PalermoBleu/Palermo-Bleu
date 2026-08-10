@@ -154,7 +154,7 @@ nav.scrolled .nav-logo-icon { filter: brightness(0); }
     <div class="sidebar-items"><a href="product-cap.html">Palermo Bleu Cap</a></div>
   </div>
   <div class="sidebar-footer">
-    <a href="#" class="sidebar-footer-link">→ Instagram</a>
+    <a href="https://www.instagram.com/palermo.bleu" target="_blank" rel="noopener" class="sidebar-footer-link">→ Instagram</a>
     <img src="pb_logo_outline_negro.png" alt="Palermo Bleu" class="sidebar-logo">
   </div>
 </aside>
@@ -167,9 +167,9 @@ nav.scrolled .nav-logo-icon { filter: brightness(0); }
   </div>
   <div class="nav-center"><a href="#" class="nav-logo-wrap" onclick="showHome(event)"><img class="nav-logo-icon" src="pb_logo_outline_negro.png" alt="Palermo Bleu"></a></div>
   <div class="nav-right">
-    <button type="button" class="nav-icon-btn nav-account" aria-label="Account">
+    <a href="#" class="nav-icon-btn nav-account" aria-label="Account" onclick="showPage(event,'account')">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>
-    </button>
+    </a>
     <button type="button" class="nav-icon-btn nav-cart" aria-label="Cart">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
     </button>
@@ -269,15 +269,36 @@ nav.scrolled .nav-logo-icon { filter: brightness(0); }
     <p style="margin-top: 2rem;">We'll be setting up a dedicated brand email soon. Until then, this is the direct line.</p>
   </div>
 </div>
+<div class="page-section" id="page-account">
+  <a href="#" class="page-back" onclick="showHome(event)">← Back</a>
+  <h1 class="page-title">Your account.</h1>
+  <div class="page-body">
+    <p>Accounts and order history aren't live yet — right now every purchase runs through Stripe checkout, one order at a time, with no login required.</p>
+    <p>If you need to check on an order, change a size, or ask anything else, just write to us directly and we'll sort it by hand.</p>
+    <a class="contact-email" href="mailto:lcustodiomasriera@gmail.com">lcustodiomasriera@gmail.com</a>
+  </div>
+</div>
+<div class="page-section" id="page-shipping">
+  <a href="#" class="page-back" onclick="showHome(event)">← Back</a>
+  <h1 class="page-title">Shipping & returns.</h1>
+  <div class="page-body">
+    <p><strong>Shipping.</strong> Every order is made to order and shipped directly from our print partner. Standard delivery takes 3–7 business days once your order is placed. You'll receive a confirmation by email as soon as your order is placed — tracking is sent separately once it ships.</p>
+    <p><strong>Returns.</strong> Returns are accepted within 14 days of delivery. Items must be unworn, unwashed, and in their original condition. To start a return, write to us with your order details and we'll walk you through it.</p>
+    <p><strong>Exchanges.</strong> Need a different size or colour? Let us know within 14 days of delivery and we'll do our best to sort it out.</p>
+    <a class="contact-email" href="mailto:lcustodiomasriera@gmail.com">lcustodiomasriera@gmail.com</a>
+  </div>
+</div>
 <footer>
   <div><p class="footer-logo">Palermo Bleu</p><p class="footer-copy">© 2026 — Barcelona</p></div>
   <div class="footer-col"><a href="#" onclick="showHome(event)">Shop</a><a href="#" onclick="showPage(event,'about')">About</a><a href="#" onclick="showPage(event,'contact')">Contact</a></div>
-  <div class="footer-col"><a href="#">Instagram</a><a href="#">Shipping & Returns</a></div>
+  <div class="footer-col"><a href="https://www.instagram.com/palermo.bleu" target="_blank" rel="noopener">Instagram</a><a href="#" onclick="showPage(event,'shipping')">Shipping & Returns</a></div>
 </footer>
 <script>
 function showPage(e,page){e.preventDefault();document.getElementById('main-content').style.display='none';document.querySelectorAll('.page-section').forEach(p=>p.classList.remove('active'));document.getElementById('page-'+page).classList.add('active');window.scrollTo(0,0);document.querySelector('body > nav').classList.add('scrolled');}
 function showHome(e){if(e)e.preventDefault();document.getElementById('main-content').style.display='block';document.querySelectorAll('.page-section').forEach(p=>p.classList.remove('active'));window.scrollTo(0,0);handleNav();}
 window.addEventListener('load',()=>{setTimeout(()=>{const intro=document.getElementById('intro');intro.style.transition='opacity 0.5s ease';intro.style.opacity='0';setTimeout(()=>{intro.classList.add('done');},500);},1800);});
+const deepLinkPage=location.hash.replace('#','');
+if(['about','contact','account','shipping'].includes(deepLinkPage))showPage({preventDefault(){}},deepLinkPage);
 function openSidebar(){document.getElementById('sidebar').classList.add('open');document.getElementById('sidebarOverlay').classList.add('visible');document.querySelector('nav').classList.add('hidden');document.body.style.overflow='hidden';}
 function closeSidebar(){document.getElementById('sidebar').classList.remove('open');document.getElementById('sidebarOverlay').classList.remove('visible');document.querySelector('nav').classList.remove('hidden');document.body.style.overflow='';}
 function toggleCategory(id){document.getElementById(id).classList.toggle('open');}
