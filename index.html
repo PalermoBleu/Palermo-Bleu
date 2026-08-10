@@ -33,8 +33,10 @@ nav.hidden { opacity: 0; visibility: hidden; }
 .hamburger { display: flex; flex-direction: column; gap: 4px; }
 .hamburger span { display: block; width: 17px; height: 1.4px; background: var(--white); transition: background 0.4s ease; }
 nav.scrolled .hamburger span { background: var(--ink); }
-.nav-icon-btn { display: flex; align-items: center; justify-content: center; background: none; border: none; padding: 0; margin: 0; cursor: pointer; color: var(--white); text-decoration: none; transition: color 0.4s ease; }
+.nav-icon-btn { position: relative; display: flex; align-items: center; justify-content: center; background: none; border: none; padding: 0; margin: 0; cursor: pointer; color: var(--white); text-decoration: none; transition: color 0.4s ease; }
 nav.scrolled .nav-icon-btn { color: var(--ink); }
+.wishlist-badge { position: absolute; top: -5px; right: -7px; background: var(--ink); color: var(--white); font-family: 'Inter', sans-serif; font-size: 0.55rem; line-height: 1; min-width: 14px; height: 14px; border-radius: 50%; display: none; align-items: center; justify-content: center; padding: 0 3px; }
+.wishlist-badge.visible { display: flex; }
 .nav-icon-btn svg { display: block; }
 .sidebar { position: fixed; top: 16px; left: 16px; bottom: 16px; z-index: 400; width: clamp(300px, 32vw, 460px); background: rgba(252,250,248,0.42); backdrop-filter: blur(36px); -webkit-backdrop-filter: blur(36px); border-radius: 20px; border: 1px solid rgba(255,255,255,0.45); transform: translateX(calc(-100% - 24px)); transition: transform 0.45s cubic-bezier(0.4,0,0.2,1); padding: 1.8rem 2.2rem 2rem; display: flex; flex-direction: column; overflow-y: auto; scrollbar-width: none; box-shadow: 0 8px 48px rgba(0,0,0,0.05); }
 .sidebar::-webkit-scrollbar { display: none; }
@@ -171,8 +173,9 @@ nav.scrolled .nav-logo-icon { filter: brightness(0); }
     <a href="#" class="nav-icon-btn nav-account" aria-label="Account" onclick="showPage(event,'account')">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>
     </a>
-    <button type="button" class="nav-icon-btn nav-cart" aria-label="Cart" onclick="showPage(event,'cart')">
+    <button type="button" class="nav-icon-btn nav-cart" aria-label="Wishlist" onclick="showPage(event,'wishlist')">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+      <span class="wishlist-badge" id="wishlistBadge"></span>
     </button>
   </div>
 </nav>
@@ -289,18 +292,12 @@ nav.scrolled .nav-logo-icon { filter: brightness(0); }
     <a class="contact-email" href="mailto:lcustodiomasriera@gmail.com">lcustodiomasriera@gmail.com</a>
   </div>
 </div>
-<div class="page-section" id="page-cart">
-  <a href="#" class="page-back" onclick="showHome(event)">← Back</a>
-  <h1 class="page-title">Your cart.</h1>
-  <div class="page-body">
-    <p>There's no shared shopping cart yet — each size and colour has its own direct Stripe checkout link, so picking a size on a product page takes you straight to a one-item checkout instead of adding to a basket here.</p>
-    <p>Buying more than one piece? Just check out each one separately, or write to us and we'll help you sort it in one go.</p>
-    <a class="contact-email" href="mailto:lcustodiomasriera@gmail.com">lcustodiomasriera@gmail.com</a>
-  </div>
-</div>
 <div class="page-section" id="page-wishlist">
   <a href="#" class="page-back" onclick="showHome(event)">← Back</a>
   <h1 class="page-title">Your wishlist.</h1>
+  <div class="page-body">
+    <p>There's no shared shopping cart — each size and colour has its own direct Stripe checkout link, so picking a size on a product page takes you straight to a one-item checkout. This wishlist is just for keeping track of what you like.</p>
+  </div>
   <div class="page-body" id="wishlistEmpty" style="display:none;">
     <p>Nothing saved yet. Tap "Save to wishlist" on any product page and it'll show up here.</p>
   </div>
@@ -315,11 +312,18 @@ nav.scrolled .nav-logo-icon { filter: brightness(0); }
 function showPage(e,page){e.preventDefault();document.getElementById('main-content').style.display='none';document.querySelectorAll('.page-section').forEach(p=>p.classList.remove('active'));document.getElementById('page-'+page).classList.add('active');window.scrollTo(0,0);document.querySelector('body > nav').classList.add('scrolled');if(page==='wishlist')renderWishlist();}
 
 function getWishlist(){try{return JSON.parse(localStorage.getItem('pb_wishlist')||'[]');}catch(e){return [];}}
+function updateWishlistBadge(){
+  const badge=document.getElementById('wishlistBadge');
+  const count=getWishlist().length;
+  badge.textContent=count;
+  badge.classList.toggle('visible',count>0);
+}
 function renderWishlist(){
   const list=getWishlist();
   const grid=document.getElementById('wishlistGrid');
   const empty=document.getElementById('wishlistEmpty');
   grid.innerHTML='';
+  updateWishlistBadge();
   if(!list.length){empty.style.display='block';return;}
   empty.style.display='none';
   list.forEach(item=>{
@@ -330,10 +334,11 @@ function renderWishlist(){
     grid.appendChild(a);
   });
 }
+updateWishlistBadge();
 function showHome(e){if(e)e.preventDefault();document.getElementById('main-content').style.display='block';document.querySelectorAll('.page-section').forEach(p=>p.classList.remove('active'));window.scrollTo(0,0);handleNav();}
 window.addEventListener('load',()=>{setTimeout(()=>{const intro=document.getElementById('intro');intro.style.transition='opacity 0.5s ease';intro.style.opacity='0';setTimeout(()=>{intro.classList.add('done');},500);},1800);});
 const deepLinkPage=location.hash.replace('#','');
-if(['about','contact','account','shipping'].includes(deepLinkPage))showPage({preventDefault(){}},deepLinkPage);
+if(['about','contact','account','shipping','wishlist'].includes(deepLinkPage))showPage({preventDefault(){}},deepLinkPage);
 function openSidebar(){document.getElementById('sidebar').classList.add('open');document.getElementById('sidebarOverlay').classList.add('visible');document.querySelector('nav').classList.add('hidden');document.body.style.overflow='hidden';}
 function closeSidebar(){document.getElementById('sidebar').classList.remove('open');document.getElementById('sidebarOverlay').classList.remove('visible');document.querySelector('nav').classList.remove('hidden');document.body.style.overflow='';}
 function toggleCategory(id){document.getElementById(id).classList.toggle('open');}
