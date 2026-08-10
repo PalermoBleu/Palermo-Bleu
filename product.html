@@ -85,6 +85,7 @@ nav {
 .btn-buy.disabled { background: var(--border); color: var(--muted); cursor: not-allowed; pointer-events: none; }
 .btn-wishlist { width: 100%; height: 44px; background: none; color: var(--ink); border: 1px solid var(--border); cursor: pointer; font-family: 'Inter', sans-serif; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; transition: border-color 0.2s; margin-bottom: 2.5rem; }
 .btn-wishlist:hover { border-color: var(--ink); }
+.btn-wishlist.saved { border-color: var(--ink); background: var(--ink); color: var(--white); }
 
 .info-divider { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
 
@@ -246,7 +247,7 @@ nav {
 
     <p class="size-warning" id="sizeWarning">Please select a size</p>
     <a href="#" class="btn-buy disabled" id="btnBuy" onclick="handleBuy(event)">Add to cart</a>
-    <button class="btn-wishlist">Save to wishlist</button>
+    <button class="btn-wishlist" id="btnWishlist" onclick="handleWishlist()">Save to wishlist</button>
 
     <hr class="info-divider">
 
@@ -301,6 +302,26 @@ const stripeLinks = {
 
 let currentImg = 0;
 let selectedSize = null;
+
+const wishlistItem = { url: 'product.html', name: 'Printed Essential White Tee', price: '€ 55', image: 'tee-front.png' };
+function getWishlist() { try { return JSON.parse(localStorage.getItem('pb_wishlist') || '[]'); } catch (e) { return []; } }
+function setWishlist(list) { localStorage.setItem('pb_wishlist', JSON.stringify(list)); }
+function isWishlisted(url) { return getWishlist().some(i => i.url === url); }
+function toggleWishlist(item) {
+  let list = getWishlist();
+  const idx = list.findIndex(i => i.url === item.url);
+  if (idx > -1) { list.splice(idx, 1); } else { list.push(item); }
+  setWishlist(list);
+  return idx === -1;
+}
+function updateWishlistBtn() {
+  const btn = document.getElementById('btnWishlist');
+  const saved = isWishlisted(wishlistItem.url);
+  btn.textContent = saved ? 'Saved to wishlist ✓' : 'Save to wishlist';
+  btn.classList.toggle('saved', saved);
+}
+function handleWishlist() { toggleWishlist(wishlistItem); updateWishlistBtn(); }
+updateWishlistBtn();
 
 function selectSize(btn, size) {
   document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('selected'));

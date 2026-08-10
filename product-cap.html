@@ -56,6 +56,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:grid;grid-template-c
 .btn-buy.disabled{background:var(--border);color:var(--muted);cursor:not-allowed;pointer-events:none;}
 .btn-wishlist{width:100%;height:44px;background:none;color:var(--ink);border:1px solid var(--border);cursor:pointer;font-family:'Inter',sans-serif;font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;transition:border-color 0.2s;margin-bottom:2.5rem;}
 .btn-wishlist:hover{border-color:var(--ink);}
+.btn-wishlist.saved{border-color:var(--ink);background:var(--ink);color:var(--white);}
 .info-divider{border:none;border-top:1px solid var(--border);margin:2rem 0;}
 .accordion-item{border-bottom:1px solid var(--border);}
 .accordion-btn{width:100%;background:none;border:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;padding:1.1rem 0;font-family:'Inter',sans-serif;font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink);text-align:left;}
@@ -138,7 +139,7 @@ nav{padding:0 1rem;}
     <div class="one-size-tag">One Size</div>
     <p class="color-warning" id="colorWarning">Please select a colour</p>
     <a href="#" class="btn-buy disabled" id="btnBuy" onclick="handleBuy(event)">Add to cart</a>
-    <button class="btn-wishlist">Save to wishlist</button>
+    <button class="btn-wishlist" id="btnWishlist" onclick="handleWishlist()">Save to wishlist</button>
     <hr class="info-divider">
     <div class="accordion-item" id="acc-details">
       <button class="accordion-btn" onclick="toggleAccordion('acc-details')">Details <span class="accordion-arrow">+</span></button>
@@ -169,6 +170,27 @@ const colorPhotos = {
   'black': 'cap-black.png'
 };
 let selectedColor = null;
+
+const wishlistItem = { url: 'product-cap.html', name: 'Palermo Bleu Cap', price: '€ 35', image: 'cap-navy.png' };
+function getWishlist() { try { return JSON.parse(localStorage.getItem('pb_wishlist') || '[]'); } catch (e) { return []; } }
+function setWishlist(list) { localStorage.setItem('pb_wishlist', JSON.stringify(list)); }
+function isWishlisted(url) { return getWishlist().some(i => i.url === url); }
+function toggleWishlist(item) {
+  let list = getWishlist();
+  const idx = list.findIndex(i => i.url === item.url);
+  if (idx > -1) { list.splice(idx, 1); } else { list.push(item); }
+  setWishlist(list);
+  return idx === -1;
+}
+function updateWishlistBtn() {
+  const btn = document.getElementById('btnWishlist');
+  const saved = isWishlisted(wishlistItem.url);
+  btn.textContent = saved ? 'Saved to wishlist ✓' : 'Save to wishlist';
+  btn.classList.toggle('saved', saved);
+}
+function handleWishlist() { toggleWishlist(wishlistItem); updateWishlistBtn(); }
+updateWishlistBtn();
+
 function selectColor(btn, color, name) {
   document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('selected'));
   btn.classList.add('selected');
