@@ -69,6 +69,12 @@ nav.scrolled .nav-icon-btn { color: var(--ink); }
 .hero-split { display: flex; width: 100%; }
 .hero-split-item { position: relative; flex: 1 1 50%; aspect-ratio: 1/1; overflow: hidden; }
 .hero-split-item img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.hero-split-item::after, .editorial-item::after {
+  content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  opacity: 0.07; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 140px 140px;
+}
 .hero-placeholder { position: absolute; inset: 0; width: 100%; height: 100%; background: linear-gradient(160deg, #e8e2d8 0%, #d8d0c4 100%); }
 .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.3) 100%); }
 .hero-logo-corner { position: absolute; bottom: 2.2rem; right: 2rem; z-index: 3; width: 52px; height: auto; opacity: 0.35; filter: brightness(0) invert(1); pointer-events: none; }
@@ -98,8 +104,8 @@ nav.scrolled .nav-icon-btn { color: var(--ink); }
 .product-price { font-family: 'Inter', sans-serif; font-size: 0.75rem; font-weight: 300; color: var(--muted); letter-spacing: 0.02em; }
 .editorial-band { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; background: var(--white); }
 .editorial-item { position: relative; overflow: hidden; background: var(--off); aspect-ratio: 1/1; display: flex; align-items: center; justify-content: center; }
-.editorial-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.15) 45%, rgba(0,0,0,0) 70%); }
-.editorial-text { position: relative; z-index: 2; padding: 2.5rem; align-self: flex-end; width: 100%; }
+.editorial-overlay { position: absolute; inset: 0; z-index: 2; background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.15) 45%, rgba(0,0,0,0) 70%); }
+.editorial-text { position: relative; z-index: 3; padding: 2.5rem; align-self: flex-end; width: 100%; }
 .editorial-tag { font-family: 'Inter', sans-serif; font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 0.6rem; display: block; }
 .editorial-headline { font-family: 'Inter', sans-serif; font-size: clamp(1.1rem, 2.4vw, 1.5rem); font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: rgba(255,255,255,0.92); line-height: 1.4; }
 .brand-strip { padding: 5rem 2rem; max-width: 640px; margin: 0 auto; text-align: center; }
@@ -182,8 +188,8 @@ nav.scrolled .nav-logo-icon { filter: brightness(0); }
 <div id="main-content">
 <section class="hero">
   <div class="hero-split">
-    <div class="hero-split-item"><img src="hero-right.jpg" alt="Palermo Bleu — Sanctuary at dusk"></div>
     <div class="hero-split-item"><img src="hero-left.jpg" alt="Palermo Bleu — Surf, Barcelona"></div>
+    <div class="hero-split-item"><img src="hero-lighthole.jpg" alt="Palermo Bleu — Light hole"></div>
   </div>
   <div class="hero-overlay"></div>
   <img class="hero-logo-corner" src="pb_logo_outline_negro.png" alt="Palermo Bleu">
@@ -238,14 +244,14 @@ nav.scrolled .nav-logo-icon { filter: brightness(0); }
 </div>
 <div class="editorial-band">
   <div class="editorial-item">
-    <div class="hero-placeholder"></div>
+    <img src="editorial-desertmeeting.jpg" alt="Palermo Bleu — Desert gathering at dusk" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
     <div class="editorial-overlay"></div>
     <div class="editorial-text">
       <span class="editorial-tag">Palermo Bleu — 2026</span>
       <p class="editorial-headline">Colour as memory.<br>Cloth as character.</p>
     </div>
   </div>
-  <div class="editorial-item"><div class="hero-placeholder"></div></div>
+  <div class="editorial-item"><img src="hero-right.jpg" alt="Palermo Bleu — Sanctuary at dusk" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></div>
 </div>
 <div class="brand-strip fade-up">
   <h2>Made for those who wear colour the way others wear silence.</h2>
