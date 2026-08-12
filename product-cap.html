@@ -122,8 +122,8 @@ nav{padding:0 1rem;}
     <div class="gallery-photo" onclick="openLightbox()">
       <img id="main-photo" src="cap-navy.png" alt="Palermo Bleu Cap">
     </div>
-    <div class="gallery-photo"><div class="gallery-placeholder ph-khaki"></div></div>
-    <div class="gallery-photo"><div class="gallery-placeholder ph-black"></div></div>
+    <div class="gallery-photo" onclick="openLightbox('cap-lifestyle-1.jpg')"><img src="cap-lifestyle-1.jpg" alt="Palermo Bleu Cap — worn on the beach"></div>
+    <div class="gallery-photo" onclick="openLightbox('cap-lifestyle-2.jpg')"><img src="cap-lifestyle-2.jpg" alt="Palermo Bleu Cap — worn looking out to sea"></div>
   </div>
   <div class="product-info">
     <p class="product-breadcrumb"><a href="index.html">Home</a> › <a href="#">Accessories</a> › Palermo Bleu Cap</p>
@@ -205,9 +205,9 @@ function selectColor(btn, color, name) {
 function handleBuy(e) {
   if (!selectedColor) { e.preventDefault(); document.getElementById('colorWarning').style.display = 'block'; }
 }
-function openLightbox() {
-  const src = selectedColor ? colorPhotos[selectedColor] : 'cap-navy.png';
-  document.getElementById('lightboxImg').src = src;
+function openLightbox(src) {
+  const finalSrc = src || (selectedColor ? colorPhotos[selectedColor] : 'cap-navy.png');
+  document.getElementById('lightboxImg').src = finalSrc;
   document.getElementById('lightbox').classList.add('active');
   document.body.style.overflow = 'hidden';
 }
