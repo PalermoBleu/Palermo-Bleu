@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://palermobleu.github.io/Palermo-Bleu/sitemap.xml
