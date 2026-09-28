@@ -14,7 +14,7 @@
 <meta property="og:title" content="Via Camerelle Tee — Palermo Bleu">
 <meta property="og:description" content="100% cotton, screen-printed graphic. €34,99.">
 <meta property="og:url" content="https://palermobleu.com/product.html">
-<meta property="og:image" content="https://palermobleu.com/via-camerelle-front.jpg">
+<meta property="og:image" content="https://palermobleu.com/via-camerelle-front.webp">
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -214,13 +214,13 @@ nav {
 
   <div class="gallery">
     <div class="gallery-photo" onclick="openLightbox(0)">
-      <img src="via-camerelle-front.jpg" alt="Via Camerelle Tee — Front">
+      <img src="via-camerelle-front.webp" alt="Via Camerelle Tee — Front">
     </div>
     <div class="gallery-photo" onclick="openLightbox(1)">
-      <img src="via-camerelle-lifestyle-1.jpg" alt="Via Camerelle Tee — Lifestyle">
+      <img src="via-camerelle-lifestyle-1.webp" alt="Via Camerelle Tee — Lifestyle">
     </div>
     <div class="gallery-photo" onclick="openLightbox(2)">
-      <img src="via-camerelle-lifestyle-2.jpg" alt="Via Camerelle Tee — Detail">
+      <img src="via-camerelle-lifestyle-2.webp" alt="Via Camerelle Tee — Detail">
     </div>
     <div class="gallery-photo" onclick="openLightbox(3)">
       <div class="gallery-placeholder ph-4"></div>
@@ -295,16 +295,16 @@ nav {
 
 <script>
 const photos = [
-  'via-camerelle-front.jpg',
-  'via-camerelle-lifestyle-1.jpg',
-  'via-camerelle-lifestyle-2.jpg',
+  'via-camerelle-front.webp',
+  'via-camerelle-lifestyle-1.webp',
+  'via-camerelle-lifestyle-2.webp',
   '', '', '', ''
 ];
 
 let currentImg = 0;
 let selectedSize = null;
 
-const wishlistItem = { url: 'product.html', name: 'Via Camerelle Tee', price: '€ 34,99', image: 'via-camerelle-front.jpg' };
+const wishlistItem = { url: 'product.html', name: 'Via Camerelle Tee', price: '€ 34,99', image: 'via-camerelle-front.webp' };
 function getWishlist() { try { return JSON.parse(localStorage.getItem('pb_wishlist') || '[]'); } catch (e) { return []; } }
 function setWishlist(list) { localStorage.setItem('pb_wishlist', JSON.stringify(list)); }
 function isWishlisted(url) { return getWishlist().some(i => i.url === url); }
